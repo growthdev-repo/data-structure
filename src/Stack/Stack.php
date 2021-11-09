@@ -2,44 +2,36 @@
 
 declare(strict_types=1);
 
-namespace GrowthDev\DataStructure\Stack;
+namespace Growthdev\DataStructure\Stack;
 
 class Stack implements Collection, Countable, Iterator
 {
     private int $count = 0;
-    private ?object $firstItem = null;
-    private ?object $nextItem = null;
-    private ?object $lastItem = null;
+    private int $position = 0;
+    private ?Item $item = null;
 
     public function peek(): ?object
     {
-        return $this->lastItem;
+        return $this->item->getValue();
     }
 
     public function push(object $item): void
     {
-        if ($this->firstItem === null) {
-            $this->firstItem = $item;
-            $this->lastItem = $item;
-        } else {
-            $this->nextItem = $item;
-            $this->lastItem = $item;
-        }
+        $this->item = new Item($item, $this->item);
         $this->count++;
     }
 
     public function pop(): ?object
     {
-        if ($this->firstItem === null) {
+        if ($this->count === 0) {
             return null;
         }
 
-        $item = $this->firstItem;
-        $this->firstItem = $this->nextItem;
-        $this->nextItem = null;
+        $item = $this->item;
+        $this->item = $this->item->getNext();
         $this->count--;
 
-        return $item;
+        return $item->getValue();
     }
 
     public function count(): int
@@ -49,11 +41,22 @@ class Stack implements Collection, Countable, Iterator
 
     public function hasNext(): bool
     {
-        return $this->nextItem !== null;
+        return $this->count > $this->position;
     }
 
     public function current(): ?object
     {
-        return $this->firstItem;
+        return $this->item->getValue();
+    }
+
+    public function next(): void
+    {
+        $this->item = $this->item->getNext();
+        $this->position++;
+    }
+
+    public function isEmpty(): bool
+    {
+        return $this->count === 0;
     }
 }

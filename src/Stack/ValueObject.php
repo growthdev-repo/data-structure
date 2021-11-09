@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GrowthDev\DataStructure\Stack;
+namespace Growthdev\DataStructure\Stack;
 
 final class ValueObject
 {
