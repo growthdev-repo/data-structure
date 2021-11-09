@@ -8,5 +8,5 @@ interface Iterator
 {
     public function hasNext(): bool;
 
-    public function next(): ?object;
+    public function current(): ?object;
 }
