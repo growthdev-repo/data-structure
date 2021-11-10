@@ -9,7 +9,7 @@ class Stack implements Collection, Countable, Iterator
     private int $count = 0;
     private int $position = 0;
     private ?Node $node = null;
-    private ?Node $last = null;
+    private ?Node $lastNode = null;
 
     public function peek(): ?ValueObject
     {
@@ -18,8 +18,8 @@ class Stack implements Collection, Countable, Iterator
 
     public function push(ValueObject $value): void
     {
-        $this->node = new Node($value, $this->node);        
-        $this->last = $this->node;
+        $this->node = new Node($value, $this->node);
+        $this->lastNode = $this->node;
 
         $this->count++;
     }
@@ -61,7 +61,7 @@ class Stack implements Collection, Countable, Iterator
     public function rewind(): void
     {
         $this->position = 0;
-        $this->node = $this->last;
+        $this->node = $this->lastNode;
         printf("\n 🔥 Rewind the Iterator to the first element...\n");
     }
 
