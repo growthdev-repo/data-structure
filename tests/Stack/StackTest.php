@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 final class StackTest extends TestCase
 {
-    public function testPeek(): void
+    public function testCanBePeek(): void
     {
         $stack = new Stack();
         $stack->push(new ValueObject('Fist Item'));
@@ -20,7 +20,7 @@ final class StackTest extends TestCase
         $this->assertEquals('Last Item (top item)', $stack->peek()->getValue());
     }
 
-    public function testPush(): void
+    public function testCanBePush(): void
     {
         $stack = new Stack();
         $stack->push(new ValueObject('Walmir'));
@@ -33,7 +33,7 @@ final class StackTest extends TestCase
         $this->assertEquals(6, $stack->count());
     }
 
-    public function testPop(): void
+    public function testCanBePop(): void
     {
         $stack = new Stack();
         $stack->push(new ValueObject('Fist Item'));
@@ -44,7 +44,7 @@ final class StackTest extends TestCase
         $this->assertEquals(2, $stack->count());
     }
 
-    public function testIsEmpty(): void
+    public function testIfIsEmpty(): void
     {
         $stack = new Stack();
         $this->assertTrue($stack->isEmpty());
@@ -66,7 +66,7 @@ final class StackTest extends TestCase
         $this->assertEquals(0, $stack->count());
     }
 
-    public function testCanBeIteratedWitLoop(): void
+    public function testCanBeIteratedWithLoop(): void
     {
         $stack = new Stack();
         $stack->push(new ValueObject('1º Item'));
