@@ -4,23 +4,26 @@ declare(strict_types=1);
 
 namespace Growthdev\DataStructure\Stack;
 
-final class Item
+final class Node
 {
-    private ?Item $next = null;
-    private ?object $value;
+    private ?ValueObject $value;
+    private ?Node $next = null;
 
-    public function __construct(object $value, ?Item $next = null)
+
+    public function __construct(ValueObject $value, ?Node $next = null)
     {
+
         $this->value = $value;
         $this->next = $next;
     }
 
-    public function getNext(): ?Item
+    public function getNext(): ?Node
     {
+
         return $this->next;
     }
     
-    public function getValue(): ?object
+    public function getValue(): ?ValueObject
     {
         return $this->value;
     }

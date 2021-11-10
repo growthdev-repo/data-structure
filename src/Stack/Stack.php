@@ -8,30 +8,33 @@ class Stack implements Collection, Countable, Iterator
 {
     private int $count = 0;
     private int $position = 0;
-    private ?Item $item = null;
+    private ?Node $node = null;
+    private ?Node $last = null;
 
-    public function peek(): ?object
+    public function peek(): ?ValueObject
     {
-        return $this->item->getValue();
+        return $this->node->getValue();
     }
 
-    public function push(object $item): void
+    public function push(ValueObject $value): void
     {
-        $this->item = new Item($item, $this->item);
+        $this->node = new Node($value, $this->node);        
+        $this->last = $this->node;
+
         $this->count++;
     }
 
-    public function pop(): ?object
+    public function pop(): ?ValueObject
     {
         if ($this->count === 0) {
             return null;
         }
 
-        $item = $this->item;
-        $this->item = $this->item->getNext();
+        $node = $this->node;
+        $this->node = $this->node->getNext();
         $this->count--;
 
-        return $item->getValue();
+        return $node->getValue();
     }
 
     public function count(): int
@@ -41,18 +44,25 @@ class Stack implements Collection, Countable, Iterator
 
     public function hasNext(): bool
     {
-        return $this->count > $this->position;
+        return $this->position < $this->count;
     }
 
-    public function current(): ?object
+    public function current(): ?ValueObject
     {
-        return $this->item->getValue();
+        return $this->node->getValue();
     }
 
     public function next(): void
     {
-        $this->item = $this->item->getNext();
+        $this->node = $this->node->getNext();
         $this->position++;
+    }
+
+    public function rewind(): void
+    {
+        $this->position = 0;
+        $this->node = $this->last;
+        printf("\n 🔥 Rewind the Iterator to the first element...\n");
     }
 
     public function isEmpty(): bool

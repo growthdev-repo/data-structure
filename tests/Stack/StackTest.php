@@ -69,16 +69,26 @@ final class StackTest extends TestCase
     public function testCanBeIteratedWitLoop(): void
     {
         $stack = new Stack();
-        $stack->push(new ValueObject('Fist Item'));
-        $stack->push(new ValueObject('Second Item'));
-        $stack->push(new ValueObject('Third Item'));
-        $stack->push(new ValueObject('Last Item (top item)'));
-        
-        $i = 0;
+        $stack->push(new ValueObject('1º Item'));
+        $stack->push(new ValueObject('2º Item'));
+        $stack->push(new ValueObject('3º Item'));
+        $stack->push(new ValueObject('4º Item (top item)'));
+
+        $stack->rewind();
+
         while ($stack->hasNext()) {
             $currentValue = $stack->current()->getValue();
-            printf("\t%dº to leave -> %s\n",++$i, $currentValue);
+            printf("\t%s\n", $currentValue);
+            
+            $this->assertNotEmpty($currentValue);
+            $stack->next();
+        }
 
+        $stack->rewind();
+        while ($stack->hasNext()) {
+            $currentValue = $stack->current()->getValue();
+            printf("\t%s\n", $currentValue);
+            
             $this->assertNotEmpty($currentValue);
             $stack->next();
         }
