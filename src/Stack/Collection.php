@@ -6,9 +6,9 @@ namespace Growthdev\DataStructure\Stack;
 
 interface Collection
 {
-    public function peek(): ?object;
+    public function peek(): ?ValueObject;
     
-    public function push(object $item): void;
+    public function push(ValueObject $item): void;
 
-    public function pop(): ?object;
+    public function pop(): ?ValueObject;
 }
